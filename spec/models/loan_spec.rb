@@ -80,4 +80,36 @@ RSpec.describe Loan, type: :model do
       end
     end
   end
+
+  context 'when fully paid' do
+    subject { create :loan, :paid, amount: 1_000_000 }
+
+    it '#paid_debt is correct' do
+      expect(subject.paid_debt.round(2)).to eq 1_000_000
+    end
+
+    it '#paid_perc is correct' do
+      expect(subject.paid_perc.round(2)).to eq 150_000
+    end
+
+    it '#result_rate is correct' do
+      expect(subject.result_rate.round(2)).to eq 0.30
+    end
+  end
+
+  context 'when fully paid with deliquencies' do
+    subject { create :loan, :paid, amount: 1_000_000, deliquencies_count: 4 }
+
+    it '#paid_debt is correct' do
+      expect(subject.paid_debt.round(2)).to eq 1_000_000
+    end
+
+    it '#paid_perc is correct' do
+      expect(subject.paid_perc.round(4)).to eq 216_666.6667
+    end
+
+    it '#result_rate is correct' do
+      expect(subject.result_rate.round(2)).to eq 0.43
+    end
+  end
 end

@@ -15,6 +15,8 @@ class Loan < ApplicationRecord
 
   after_initialize :assign_defaults
 
+  # basic calculated values
+
   def monthly_debt_payment
     amount / duration
   end
@@ -35,6 +37,8 @@ class Loan < ApplicationRecord
     monthly_debt_payment + monthly_deliquency_perc_payment
   end
 
+  # payments dependent calculated values and methods
+
   def add_next_payment!(deliquency: false)
     raise 'Loan already paid' if paid?
     next_month = (payments.maximum(:month) || 0) + 1
@@ -43,6 +47,21 @@ class Loan < ApplicationRecord
 
   def paid?
     payments.count == duration
+  end
+
+  def paid_perc
+    normal_payments     = payments.where(deliquency: false).count
+    deliquency_payments = payments.where(deliquency: true).count
+
+    (monthly_perc_payment * normal_payments) + (monthly_deliquency_perc_payment * deliquency_payments)
+  end
+
+  def paid_debt
+    monthly_debt_payment * payments.count
+  end
+
+  def result_rate
+    (paid_perc / paid_debt) * (12.0 / payments.count)
   end
 
   private
