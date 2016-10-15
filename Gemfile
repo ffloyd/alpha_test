@@ -43,6 +43,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
+  gem 'ffaker'
 end
 
 group :development do
