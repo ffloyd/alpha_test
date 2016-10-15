@@ -4,6 +4,8 @@ class Loan < ApplicationRecord
   BASE_ANNUAL_RATE    = 0.3
   BASE_DELIQENCY_RATE = 0.5
 
+  has_many :payments
+
   validates :legal_entity,
             :amount,
             :period,
@@ -31,6 +33,16 @@ class Loan < ApplicationRecord
 
   def monthly_deliquency_payment
     monthly_debt_payment + monthly_deliquency_perc_payment
+  end
+
+  def add_next_payment!(deliquency: false)
+    raise 'Loan already paid' if paid?
+    next_month = (payments.maximum(:month) || 0) + 1
+    payments.create(month: next_month, deliquency: deliquency)
+  end
+
+  def paid?
+    payments.count == duration
   end
 
   private
