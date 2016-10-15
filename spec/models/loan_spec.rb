@@ -149,4 +149,23 @@ RSpec.describe Loan, type: :model do
       expect(subject.result_rate.round(2)).to eq 0.20
     end
   end
+
+  context 'global stats method' do
+    before do
+      create :loan, :paid, amount: 1_000_000
+      create :loan, :paid, amount: 1_000_000, deliquencies_count: 4
+      create(:loan).tap do |loan|
+        3.times { loan.add_next_payment! }
+        loan.add_next_payment!(pay_all: true)
+      end
+    end
+
+    it '#expected_rate is correct' do
+      expect(described_class.expected_rate.round(2)).to eq 0.30
+    end
+
+    it '#calculated_rate' do
+      expect(described_class.calculated_rate.round(2)).to eq 0.31
+    end
+  end
 end

@@ -68,6 +68,18 @@ class Loan < ApplicationRecord
     (paid_perc / paid_debt) * (12.0 / duration)
   end
 
+  # global stats
+  class << self
+    def calculated_rate
+      loans = all.to_a
+      loans.map(&:result_rate).inject(:+) / loans.count
+    end
+
+    def expected_rate
+      BASE_ANNUAL_RATE
+    end
+  end
+
   private
 
   def assign_defaults
