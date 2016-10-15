@@ -47,6 +47,17 @@ RSpec.describe Loan, type: :model do
         expect(subject.paid?).to eq true
       end
     end
+
+    context 'when pay_all payment present' do
+      before do
+        subject.add_next_payment!
+        subject.add_next_payment!(pay_all: true)
+      end
+
+      it 'returns true' do
+        expect(subject.paid?).to eq true
+      end
+    end
   end
 
   context '#add_next_payment!' do
@@ -61,6 +72,11 @@ RSpec.describe Loan, type: :model do
     it 'has working deliquency option' do
       subject.add_next_payment!(deliquency: true)
       expect(subject.payments.last.deliquency?).to eq true
+    end
+
+    it 'has working pay_all option' do
+      subject.add_next_payment!(pay_all: true)
+      expect(subject.payments.last.pay_all?).to eq true
     end
 
     context 'when partially paid (2 monthes)' do
@@ -110,6 +126,27 @@ RSpec.describe Loan, type: :model do
 
     it '#result_rate is correct' do
       expect(subject.result_rate.round(2)).to eq 0.43
+    end
+  end
+
+  context 'when fully paid with pay_all payment' do
+    subject { create :loan, amount: 1_000_000 }
+
+    before do
+      3.times { subject.add_next_payment! }
+      subject.add_next_payment!(pay_all: true)
+    end
+
+    it '#paid_debt is correct' do
+      expect(subject.paid_debt.round(2)).to eq 1_000_000
+    end
+
+    it '#paid_perc is correct' do
+      expect(subject.paid_perc.round(4)).to eq 100_000
+    end
+
+    it '#result_rate is correct' do
+      expect(subject.result_rate.round(2)).to eq 0.20
     end
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161015141619) do
+ActiveRecord::Schema.define(version: 20161015151400) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20161015141619) do
     t.boolean  "deliquency"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean  "pay_all"
     t.index ["loan_id"], name: "index_payments_on_loan_id", using: :btree
   end
 
