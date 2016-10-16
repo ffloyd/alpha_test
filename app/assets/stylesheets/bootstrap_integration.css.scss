@@ -1,0 +1,20 @@
+// make all images responsive by default
+img {
+  @extend .img-responsive;
+  margin: 0 auto;
+}
+
+// apply styles to HTML elements
+// to make views framework-neutral
+main {
+  @extend .container;
+  margin-top: 51px; // accommodate the navbar
+}
+
+section {
+  @extend .row;
+
+  &.section_full-width {
+    @extend .col-md-12;
+  }
+}

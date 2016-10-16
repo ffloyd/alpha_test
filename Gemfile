@@ -17,6 +17,8 @@ gem 'coffee-rails', '~> 4.2'
 
 # frontend-stuff
 gem 'slim-rails'
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap_form'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -55,6 +57,8 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   # linters
   gem 'rubocop'
+  # generators
+  gem 'rails_layout'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
