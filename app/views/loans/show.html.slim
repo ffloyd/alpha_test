@@ -1,0 +1,19 @@
+.page-header
+  .pull-right
+    = link_to loans_path, class: 'btn btn-default' do 
+      span.glyphicon.glyphicon-list-alt
+      |  Back 
+    = link_to edit_loan_path(@loan), class: 'btn btn-primary' do 
+      span.glyphicon.glyphicon-pencil
+      |  Edit 
+  h1
+    | Show loan
+dl.dl-horizontal
+  dt
+    | Legal entity:
+  dd
+    = @loan.legal_entity
+  dt
+    | Amount:
+  dd
+    = @loan.amount

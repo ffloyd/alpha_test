@@ -1,0 +1,29 @@
+.page-header
+  = link_to new_loan_path, class: 'at-create-button pull-right' do 
+    span
+    |  New Loan
+  h1
+    | Listing loans
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th
+          | Legal entity
+        th
+          | Amount
+        th.fit
+    tbody
+      - @loans.each do | loan |
+        tr
+          td
+            = loan.legal_entity
+          td
+            = loan.amount
+          td.fit
+            = link_to 'Show', loan, class: 'at-action-button'
+            | &nbsp;
+            = link_to 'Edit', edit_loan_path(loan), class: 'at-action-button'
+            | &nbsp;
+            = link_to 'Destroy', loan, method: :delete, data: { confirm: 'Are you sure?' }, class: 'at-action-button'

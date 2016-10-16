@@ -4,18 +4,28 @@ img {
   margin: 0 auto;
 }
 
-// visual fix
+// visual fixes
 input[type="radio"], input[type="checkbox"] {
   width: initial;
   height: initial;
   margin-top: 7px;
 }
 
+.table td.fit,
+.table th.fit {
+    white-space: nowrap;
+    width: 1%;
+}
+
+.page-header a {
+  margin-left: 7px;
+}
+
 // apply styles to HTML elements
 // to make views framework-neutral
 main {
   @extend .container;
-  margin-top: $navbar-height + 10px; // accommodate the navbar
+  margin-top: 51px; // accommodate the navbar
 }
 
 section {
@@ -24,4 +34,21 @@ section {
   &.section_full-width {
     @extend .col-md-12;
   }
+}
+
+// framework-neutral elements
+a.at-create-button {
+  @extend .btn;
+  @extend .btn-primary;
+
+  span {
+    @extend .glyphicon;
+    @extend .glyphicon-plus;
+  }
+}
+
+a.at-action-button {
+  @extend .btn;
+  @extend .btn-sm;
+  @extend .btn-default;
 }
