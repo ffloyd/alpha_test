@@ -14,14 +14,17 @@
           tr
             th= Loan.human_attribute_name(:legal_entity)
             th= Loan.human_attribute_name(:amount)
+            th.section__table__slim-column= Loan.human_attribute_name(:paid)
             th.section__table__slim-column
         tbody
-          - @loans.each do | loan |
+          - @loans.each do |loan|
             tr
               td
                 = loan.legal_entity
               td
                 = loan.amount_human
+              td.section__table__slim-column
+                = loan.paid? ? t('yes') : t('no')
               td.section__table__slim-column
                 = link_to t('actions.show'), loan, class: 'at-action-button'
                 | &nbsp;
