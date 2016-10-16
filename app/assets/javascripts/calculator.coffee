@@ -1,4 +1,4 @@
-$(document).on 'ready turbolinks:load', ->
+$(document).on 'turbolinks:load', ->
   $('[data-role=calculator]').each (index, el) ->
     $el = $(el)
     $input = $el.find('input[type=number]')
