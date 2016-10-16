@@ -74,8 +74,10 @@ class Loan < ApplicationRecord
   # global stats
   class << self
     def expected_rate
-      loans = all.to_a
-      loans.select(&:paid?).map(&:result_rate).inject(:+) / loans.count
+      loans = all.to_a.select(&:paid?)
+      return optimistic_rate if loans.empty?
+
+      loans.map(&:result_rate).inject(:+) / loans.count
     end
 
     def optimistic_rate
