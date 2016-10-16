@@ -11,7 +11,7 @@ ru:
     index:
       title: Займы
       new_loan: Новый займ
-      calc_placeholder: Введите сумму
+      calc_placeholder: Введите сумму для займа на полгода
       optimistic_rate: Оптимистичная ставка
       optimistic_income: Оптимистичный доход
       expected_rate: Ожидаемая ставка
