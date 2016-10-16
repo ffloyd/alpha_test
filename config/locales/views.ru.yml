@@ -1,8 +1,14 @@
 ru:
   actions:
+    show: Просмотреть
     back: Назад
     edit: Редактировать
+    delete: Удалить
+    confirmation: Вы уверены?
   loans:
+    index:
+      title: Займы
+      new_loan: Новый займ
     show:
       title: Займ для %{legal_entity}
       monthly_payment: Ежемесячный платеж

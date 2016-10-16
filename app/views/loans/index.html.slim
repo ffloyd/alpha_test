@@ -1,18 +1,16 @@
 .page-header
   = link_to new_loan_path, class: 'at-create-button pull-right' do 
     span
-    |  New Loan
+    =< t '.new_loan'
   h1
-    | Listing loans
+    = t '.title'
 
 .table-responsive
   table.table.table-striped.table-bordered.table-hover
     thead
       tr
-        th
-          | Legal entity
-        th
-          | Amount
+        th= Loan.human_attribute_name(:legal_entity)
+        th= Loan.human_attribute_name(:amount)
         th.fit
     tbody
       - @loans.each do | loan |
@@ -20,10 +18,10 @@
           td
             = loan.legal_entity
           td
-            = loan.amount
+            = loan.amount_human
           td.fit
-            = link_to 'Show', loan, class: 'at-action-button'
+            = link_to t('actions.show'), loan, class: 'at-action-button'
             | &nbsp;
-            = link_to 'Edit', edit_loan_path(loan), class: 'at-action-button'
+            = link_to t('actions.edit'), edit_loan_path(loan), class: 'at-action-button'
             | &nbsp;
-            = link_to 'Destroy', loan, method: :delete, data: { confirm: 'Are you sure?' }, class: 'at-action-button'
+            = link_to t('actions.delete'), loan, method: :delete, data: { confirm: t('actions.confirmation') }, class: 'at-action-button'
