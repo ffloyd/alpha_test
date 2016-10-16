@@ -1,4 +1,6 @@
 class Loan < ApplicationRecord
+  include HumanReaders
+
   BASE_DURATION       = 6
   BASE_PERIOD         = 1 # TODO: currently ignored in formulas
   BASE_ANNUAL_RATE    = 0.3
@@ -79,6 +81,11 @@ class Loan < ApplicationRecord
       BASE_ANNUAL_RATE
     end
   end
+
+  # human readers
+  percent_human_reader_for  :annual_rate, :deliquency_rate
+  currency_human_reader_for :amount, :monthly_debt_payment, :monthly_perc_payment, :monthly_deliquency_perc_payment,
+                            :monthly_payment, :monthly_deliquency_payment
 
   private
 

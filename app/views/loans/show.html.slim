@@ -1,19 +1,22 @@
 .page-header
   .pull-right
-    = link_to loans_path, class: 'btn btn-default' do 
-      span.glyphicon.glyphicon-list-alt
+    = link_to loans_path, class: 'at-back-button' do 
+      span
       |  Back 
-    = link_to edit_loan_path(@loan), class: 'btn btn-primary' do 
-      span.glyphicon.glyphicon-pencil
+    = link_to edit_loan_path(@loan), class: 'at-edit-button' do 
+      span
       |  Edit 
   h1
     | Show loan
-dl.dl-horizontal
-  dt
-    | Legal entity:
-  dd
-    = @loan.legal_entity
-  dt
-    | Amount:
-  dd
-    = @loan.amount
+
+.row
+  .col-md-6
+    dl.dl-horizontal
+      - %i(legal_entity amount duration period annual_rate deliquency_rate).each do |field|
+        dt #{ Loan.human_attribute_name(field) }:
+        dd= @loan.try("#{field}_human") || @loan.public_send(field)
+  .col-md-6
+    dl.dl-horizontal
+      - %i(monthly_debt_payment monthly_perc_payment monthly_deliquency_perc_payment monthly_payment monthly_deliquency_payment).each do |field|
+        dt #{ Loan.human_attribute_name(field) }:
+        dd= @loan.try("#{field}_human") || @loan.public_send(field)

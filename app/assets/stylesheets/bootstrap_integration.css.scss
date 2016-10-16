@@ -47,6 +47,26 @@ a.at-create-button {
   }
 }
 
+a.at-back-button {
+  @extend .btn;
+  @extend .btn-default;
+
+  span {
+    @extend .glyphicon;
+    @extend .glyphicon-list-alt;
+  }
+}
+
+a.at-edit-button {
+  @extend .btn;
+  @extend .btn-default;
+
+  span {
+    @extend .glyphicon;
+    @extend .glyphicon-pencil;
+  }
+}
+
 a.at-action-button {
   @extend .btn;
   @extend .btn-sm;
