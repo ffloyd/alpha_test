@@ -19,141 +19,135 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe LoansController, type: :controller do
-
   # This should return the minimal set of attributes required to create a valid
   # Loan. As you add validations to Loan, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
+  let(:valid_attributes) do
+    {
+      legal_entity: 'Some Legal',
+      amount: 1_000_000
+    }
+  end
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  let(:invalid_attributes) do
+    {
+      legal_entity: 'Some legal'
+    }
+  end
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # LoansController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET #index" do
-    it "assigns all loans as @loans" do
+  describe 'GET #index' do
+    it 'assigns all loans as @loans' do
       loan = Loan.create! valid_attributes
       get :index, params: {}, session: valid_session
       expect(assigns(:loans)).to eq([loan])
     end
   end
 
-  describe "GET #show" do
-    it "assigns the requested loan as @loan" do
+  describe 'GET #show' do
+    it 'assigns the requested loan as @loan' do
       loan = Loan.create! valid_attributes
-      get :show, params: {id: loan.to_param}, session: valid_session
+      get :show, params: { id: loan.to_param }, session: valid_session
       expect(assigns(:loan)).to eq(loan)
     end
   end
 
-  describe "GET #new" do
-    it "assigns a new loan as @loan" do
+  describe 'GET #new' do
+    it 'assigns a new loan as @loan' do
       get :new, params: {}, session: valid_session
       expect(assigns(:loan)).to be_a_new(Loan)
     end
   end
 
-  describe "GET #edit" do
-    it "assigns the requested loan as @loan" do
-      loan = Loan.create! valid_attributes
-      get :edit, params: {id: loan.to_param}, session: valid_session
-      expect(assigns(:loan)).to eq(loan)
-    end
-  end
-
-  describe "POST #create" do
-    context "with valid params" do
-      it "creates a new Loan" do
-        expect {
-          post :create, params: {loan: valid_attributes}, session: valid_session
-        }.to change(Loan, :count).by(1)
+  describe 'POST #create' do
+    context 'with valid params' do
+      it 'creates a new Loan' do
+        expect do
+          post :create, params: { loan: valid_attributes }, session: valid_session
+        end.to change(Loan, :count).by(1)
       end
 
-      it "assigns a newly created loan as @loan" do
-        post :create, params: {loan: valid_attributes}, session: valid_session
+      it 'assigns a newly created loan as @loan' do
+        post :create, params: { loan: valid_attributes }, session: valid_session
         expect(assigns(:loan)).to be_a(Loan)
         expect(assigns(:loan)).to be_persisted
       end
 
-      it "redirects to the created loan" do
-        post :create, params: {loan: valid_attributes}, session: valid_session
+      it 'redirects to the created loan' do
+        post :create, params: { loan: valid_attributes }, session: valid_session
         expect(response).to redirect_to(Loan.last)
       end
     end
 
-    context "with invalid params" do
-      it "assigns a newly created but unsaved loan as @loan" do
-        post :create, params: {loan: invalid_attributes}, session: valid_session
+    context 'with invalid params' do
+      it 'assigns a newly created but unsaved loan as @loan' do
+        post :create, params: { loan: invalid_attributes }, session: valid_session
         expect(assigns(:loan)).to be_a_new(Loan)
       end
 
       it "re-renders the 'new' template" do
-        post :create, params: {loan: invalid_attributes}, session: valid_session
-        expect(response).to render_template("new")
+        post :create, params: { loan: invalid_attributes }, session: valid_session
+        expect(response).to render_template('new')
       end
     end
   end
 
-  describe "PUT #update" do
-    context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
-
-      it "updates the requested loan" do
-        loan = Loan.create! valid_attributes
-        put :update, params: {id: loan.to_param, loan: new_attributes}, session: valid_session
-        loan.reload
-        skip("Add assertions for updated state")
-      end
-
-      it "assigns the requested loan as @loan" do
-        loan = Loan.create! valid_attributes
-        put :update, params: {id: loan.to_param, loan: valid_attributes}, session: valid_session
-        expect(assigns(:loan)).to eq(loan)
-      end
-
-      it "redirects to the loan" do
-        loan = Loan.create! valid_attributes
-        put :update, params: {id: loan.to_param, loan: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(loan)
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns the loan as @loan" do
-        loan = Loan.create! valid_attributes
-        put :update, params: {id: loan.to_param, loan: invalid_attributes}, session: valid_session
-        expect(assigns(:loan)).to eq(loan)
-      end
-
-      it "re-renders the 'edit' template" do
-        loan = Loan.create! valid_attributes
-        put :update, params: {id: loan.to_param, loan: invalid_attributes}, session: valid_session
-        expect(response).to render_template("edit")
-      end
-    end
-  end
-
-  describe "DELETE #destroy" do
-    it "destroys the requested loan" do
+  describe 'DELETE #destroy' do
+    it 'destroys the requested loan' do
       loan = Loan.create! valid_attributes
-      expect {
-        delete :destroy, params: {id: loan.to_param}, session: valid_session
-      }.to change(Loan, :count).by(-1)
+      expect do
+        delete :destroy, params: { id: loan.to_param }, session: valid_session
+      end.to change(Loan, :count).by(-1)
     end
 
-    it "redirects to the loans list" do
+    it 'redirects to the loans list' do
       loan = Loan.create! valid_attributes
-      delete :destroy, params: {id: loan.to_param}, session: valid_session
+      delete :destroy, params: { id: loan.to_param }, session: valid_session
       expect(response).to redirect_to(loans_url)
     end
   end
 
+  describe 'DELETE #remove_last_payment' do
+    let!(:loan) { create :loan, :paid }
+
+    subject { delete :remove_last_payment, xhr: true, params: { id: loan.to_param }, session: valid_session }
+
+    it 'removes last payment' do
+      expect { subject }.to change { loan.payments.last.month }.from(6).to(5)
+    end
+  end
+
+  describe 'PUT #add_next_payment' do
+    let!(:loan) { create :loan }
+    let(:payment_params) { { deliquency: false, pay_all: false } }
+
+    subject do
+      put :add_next_payment, xhr: true, params: { id: loan.to_param, payment: payment_params }, session: valid_session
+    end
+
+    it 'adds a normal payment' do
+      expect { subject }.to change { loan.payments.count }.from(0).to(1)
+
+      payment = loan.payments.last
+
+      expect(payment.pay_all?).to     eq false
+      expect(payment.deliquency?).to  eq false
+    end
+
+    context 'with params' do
+      let(:payment_params) { { deliquency: true, pay_all: true } }
+
+      it 'adds a payment with params' do
+        subject
+        payment = loan.payments.last
+
+        expect(payment.pay_all?).to     eq true
+        expect(payment.deliquency?).to  eq true
+      end
+    end
+  end
 end

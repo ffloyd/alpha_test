@@ -1,6 +1,7 @@
 module HumanReaders
   extend ActiveSupport::Concern
 
+  # bcs draper is overkill for this
   class_methods do
     def currency_human_reader_for(*fields)
       fields.each do |field|

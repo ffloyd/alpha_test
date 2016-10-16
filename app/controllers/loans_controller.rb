@@ -55,8 +55,8 @@ class LoansController < ApplicationController
     permitted = params.require(:payment).permit(:deliquency, :pay_all)
 
     {
-      deliquency: permitted[:deliquency] == '0' ? false : true,
-      pay_all:    permitted[:pay_all] == '0' ? false : true
+      deliquency: permitted[:deliquency] == '0' ? false : permitted[:deliquency],
+      pay_all:    permitted[:pay_all] == '0' ? false : permitted[:pay_all]
     }
   end
 end

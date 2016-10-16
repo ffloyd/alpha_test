@@ -67,18 +67,18 @@ class Loan < ApplicationRecord
   end
 
   def result_rate
-    return 0.0 if paid_debt.round(2).zero?
+    return annual_rate if paid_debt.round(2).zero?
     (paid_perc / paid_debt) * (12.0 / duration)
   end
 
   # global stats
   class << self
-    def calculated_rate
+    def expected_rate
       loans = all.to_a
-      loans.map(&:result_rate).inject(:+) / loans.count
+      loans.select(&:paid?).map(&:result_rate).inject(:+) / loans.count
     end
 
-    def expected_rate
+    def optimistic_rate
       BASE_ANNUAL_RATE
     end
   end

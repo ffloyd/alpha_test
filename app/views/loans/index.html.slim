@@ -26,15 +26,15 @@
                 = link_to t('actions.show'), loan, class: 'at-action-button'
                 | &nbsp;
                 = link_to t('actions.delete'), loan, method: :delete, data: { confirm: t('actions.confirmation') }, class: 'at-action-button'
-  section.section_half-width data-role="calculator" data-optimistic-rate=Loan.expected_rate.round(4) data-expected-rate=Loan.calculated_rate.round(4) data-duration=Loan::BASE_DURATION
+  section.section_half-width data-role="calculator" data-optimistic-rate=Loan.optimistic_rate.round(4) data-expected-rate=Loan.expected_rate.round(4) data-duration=Loan::BASE_DURATION
     input.form-control type="number" placeholder=t('.calc_placeholder')
     br
     dl.section__desclist
       dt #{ t '.optimistic_rate' }:
-      dd #{ (Loan.expected_rate * 100).round(2) }%
+      dd #{ (Loan.optimistic_rate * 100).round(2) }%
       dt #{ t '.optimistic_income' }:
       dd data-output="optimistic_income" 0.0000
       dt #{ t '.expected_rate' }:
-      dd #{ (Loan.calculated_rate * 100).round(2) }%
+      dd #{ (Loan.expected_rate * 100).round(2) }%
       dt #{ t '.expected_income' }:
       dd data-output="expected_income" 0.0000

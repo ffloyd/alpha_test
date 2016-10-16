@@ -160,12 +160,12 @@ RSpec.describe Loan, type: :model do
       end
     end
 
-    it '#expected_rate is correct' do
-      expect(described_class.expected_rate.round(2)).to eq 0.30
+    it '#optimistic_rate is correct' do
+      expect(described_class.optimistic_rate.round(2)).to eq 0.30
     end
 
-    it '#calculated_rate' do
-      expect(described_class.calculated_rate.round(2)).to eq 0.31
+    it '#expected_rate' do
+      expect(described_class.expected_rate.round(2)).to eq 0.31
     end
   end
 end
