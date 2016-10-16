@@ -1,0 +1,15 @@
+ru:
+  activerecord:
+    attributes:
+      loan:
+        legal_entity: Юридическое лицо
+        amount: Сумма
+        period: Период (мес)
+        duration: Срок (мес)
+        annual_rate: Ставка годовых
+        deliquency_rate: Ставка при просрочке
+        monthly_debt_payment: Платеж по долгу
+        monthly_perc_payment: Платеж по процентам
+        monthly_deliquency_perc_payment: Платеж по процентам при просрочке
+        monthly_payment: Суммарный платеж
+        monthly_deliquency_payment: Суммарный платеж при просрочке

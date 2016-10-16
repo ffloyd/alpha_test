@@ -1,0 +1,9 @@
+ru:
+  actions:
+    back: Назад
+    edit: Редактировать
+  loans:
+    show:
+      title: Займ для %{legal_entity}
+      monthly_payment: Ежемесячный платеж
+      main_info: Основная информация

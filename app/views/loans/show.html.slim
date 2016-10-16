@@ -2,21 +2,28 @@
   .pull-right
     = link_to loans_path, class: 'at-back-button' do 
       span
-      |  Back 
+      =< t 'actions.back'
     = link_to edit_loan_path(@loan), class: 'at-edit-button' do 
       span
-      |  Edit 
-  h1
-    | Show loan
+      =< t 'actions.edit'
+  h1= t('.title', legal_entity: @loan.legal_entity)
 
 .row
   .col-md-6
-    dl.dl-horizontal
-      - %i(legal_entity amount duration period annual_rate deliquency_rate).each do |field|
-        dt #{ Loan.human_attribute_name(field) }:
-        dd= @loan.try("#{field}_human") || @loan.public_send(field)
+    .panel.panel-default
+      .panel-heading
+        h3.panel-title= t '.main_info'
+      .panel-body
+        dl.dl-horizontal
+          - %i(legal_entity amount duration period annual_rate deliquency_rate).each do |field|
+            dt #{ Loan.human_attribute_name(field) }:
+            dd= @loan.try("#{field}_human") || @loan.public_send(field)
   .col-md-6
-    dl.dl-horizontal
-      - %i(monthly_debt_payment monthly_perc_payment monthly_deliquency_perc_payment monthly_payment monthly_deliquency_payment).each do |field|
-        dt #{ Loan.human_attribute_name(field) }:
-        dd= @loan.try("#{field}_human") || @loan.public_send(field)
+    .panel.panel-default
+      .panel-heading
+        h3.panel-title= t '.monthly_payment'
+      .panel-body
+        dl.dl-horizontal
+          - %i(monthly_debt_payment monthly_perc_payment monthly_deliquency_perc_payment monthly_payment monthly_deliquency_payment).each do |field|
+            dt #{ Loan.human_attribute_name(field) }:
+            dd= @loan.try("#{field}_human") || @loan.public_send(field)
