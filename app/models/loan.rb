@@ -15,6 +15,12 @@ class Loan < ApplicationRecord
             :annual_rate,
             :deliquency_rate, presence: true
 
+  validates :amount,
+            :annual_rate,
+            :deliquency_rate, numericality: { greater_than: 0 }
+  validates :period,
+            :duration, numericality: { greater_than: 0, only_integer: true }
+
   after_initialize :assign_defaults
 
   # basic calculated values
