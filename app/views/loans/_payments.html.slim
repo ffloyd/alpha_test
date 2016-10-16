@@ -1,0 +1,24 @@
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th.fit= Payment.human_attribute_name(:month)
+        th= Payment.human_attribute_name(:amount)
+        th.fit= Payment.human_attribute_name(:deliquency)
+        th.fit= Payment.human_attribute_name(:pay_all)
+    tbody
+      - @loan.payments.each do |payment|
+        tr
+          td.fit= payment.month
+          td= payment.amount_human
+          td.fit= payment.deliquency? ? t('yes') : t('no')
+          td.fit= payment.pay_all? ? t('yes') : t('no')
+  - unless @loan.paid?
+    .well.well-sm.clearfix
+      = bootstrap_form_for Payment.new, url: '/', layout: :inline do |f|
+        .col-md-3
+          = f.check_box :deliquency
+        .col-md-5
+          = f.check_box :pay_all
+        .col-md-4
+          = f.submit t('.add_payment')

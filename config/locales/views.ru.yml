@@ -1,4 +1,6 @@
 ru:
+  yes: Да
+  no: Нет
   actions:
     show: Просмотреть
     back: Назад
@@ -13,7 +15,12 @@ ru:
       title: Займ для %{legal_entity}
       monthly_payment: Ежемесячный платеж
       main_info: Основная информация
+      payments: Платежи
+      remove_last_payment: Удалить последний платеж
+      totals: Итоги
     new:
       title: Создать займ
     form:
       submit: Создать займ
+    payments:
+      add_payment: Добавить платеж

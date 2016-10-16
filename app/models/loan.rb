@@ -67,6 +67,7 @@ class Loan < ApplicationRecord
   end
 
   def result_rate
+    return 0.0 if paid_debt.round(2).zero?
     (paid_perc / paid_debt) * (12.0 / duration)
   end
 
@@ -83,9 +84,9 @@ class Loan < ApplicationRecord
   end
 
   # human readers
-  percent_human_reader_for  :annual_rate, :deliquency_rate
+  percent_human_reader_for  :annual_rate, :deliquency_rate, :result_rate
   currency_human_reader_for :amount, :monthly_debt_payment, :monthly_perc_payment, :monthly_deliquency_perc_payment,
-                            :monthly_payment, :monthly_deliquency_payment
+                            :monthly_payment, :monthly_deliquency_payment, :paid_debt, :paid_perc
 
   private
 

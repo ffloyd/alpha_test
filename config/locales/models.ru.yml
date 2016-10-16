@@ -13,3 +13,12 @@ ru:
         monthly_deliquency_perc_payment: Платеж по процентам при просрочке
         monthly_payment: Суммарный платеж
         monthly_deliquency_payment: Суммарный платеж при просрочке
+        paid: Оплачен
+        paid_perc: Выплачено процентов
+        paid_debt: Выплачено долга
+        result_rate: Ставка в итоге (годовая)
+      payment:
+        month: Месяц
+        amount: Сумма
+        deliquency: Просрочен
+        pay_all: Досрочное погашение

@@ -24,3 +24,23 @@
           - %i(monthly_debt_payment monthly_perc_payment monthly_deliquency_perc_payment monthly_payment monthly_deliquency_payment).each do |field|
             dt #{ Loan.human_attribute_name(field) }:
             dd= @loan.try("#{field}_human") || @loan.public_send(field)
+.row
+  .col-md-6
+    .panel.panel-default
+      .panel-heading
+        .pull-right
+          = link_to t('.remove_last_payment'), '#', class: 'btn btn-danger btn-xs'
+        h3.panel-title= t '.payments'
+      .panel-body
+        = render 'payments'
+  .col-md-6
+    .panel.panel-default
+      .panel-heading
+        h3.panel-title= t '.totals'
+      .panel-body
+        dl.dl-horizontal
+          dt #{ Loan.human_attribute_name(:paid) }:
+          dd= @loan.paid? ? t('yes') : t('no')
+          - %i(paid_debt paid_perc result_rate).each do |field|
+            dt #{ Loan.human_attribute_name(field) }:
+            dd= @loan.try("#{field}_human") || @loan.public_send(field)
