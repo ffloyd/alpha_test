@@ -1,44 +1,44 @@
-.page-header
-  .pull-right
+.at-header
+  .at-header__buttons
     = link_to loans_path, class: 'at-back-button' do 
       span
       =< t 'actions.back'
   h1= t('.title', legal_entity: @loan.legal_entity)
 
 .row
-  .col-md-6
-    .panel.panel-default
-      .panel-heading
-        h3.panel-title= t '.main_info'
-      .panel-body
-        dl.dl-horizontal
+  section.section_half-width
+    .section__panel
+      .section__panel__header
+        h3= t '.main_info'
+      .section__panel__body
+        dl.section__desclist
           - %i(legal_entity amount duration period annual_rate deliquency_rate).each do |field|
             dt #{ Loan.human_attribute_name(field) }:
             dd= @loan.try("#{field}_human") || @loan.public_send(field)
-  .col-md-6
-    .panel.panel-default
-      .panel-heading
-        h3.panel-title= t '.monthly_payment'
-      .panel-body
-        dl.dl-horizontal
+  section.section_half-width
+    .section__panel
+      .section__panel__header
+        h3= t '.monthly_payment'
+      .section__panel__body
+        dl.section__desclist
           - %i(monthly_debt_payment monthly_perc_payment monthly_deliquency_perc_payment monthly_payment monthly_deliquency_payment).each do |field|
             dt #{ Loan.human_attribute_name(field) }:
             dd= @loan.try("#{field}_human") || @loan.public_send(field)
 .row
-  .col-md-6
-    .panel.panel-default
-      .panel-heading
+  section.section_half-width
+    .section__panel
+      .section__panel__header
         .pull-right
           = link_to t('.remove_last_payment'), remove_last_payment_loan_path(@loan),
                     class: 'btn btn-danger btn-xs',
                     method: :delete, data: { confirm: t('actions.confirmation') },
                     remote: true
-        h3.panel-title= t '.payments'
-      .panel-body#js-payments-data
+        h3= t '.payments'
+      .section__panel__body#js-payments-data
         = render 'payments'
-  .col-md-6
-    .panel.panel-default
-      .panel-heading
-        h3.panel-title= t '.totals'
-      .panel-body#js-totals-data
+  section.section_half-width
+    .section__panel
+      .section__panel__header
+        h3= t '.totals'
+      .section__panel__body#js-totals-data
         = render 'totals'

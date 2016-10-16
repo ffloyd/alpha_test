@@ -1,0 +1,49 @@
+// make all images responsive by default
+img {
+  @extend .img-responsive;
+  margin: 0 auto;
+}
+
+// visual fixes
+input[type="radio"], input[type="checkbox"] {
+  width: initial;
+  height: initial;
+  margin-top: 7px;
+}
+
+// apply styles to HTML elements
+// to make views framework-neutral
+main {
+  @extend .container;
+  margin-top: 51px; // accommodate the navbar
+}
+
+// Other elements
+.at-header {
+  @extend .page-header;
+
+  .at-header__buttons {
+    @extend .pull-right;
+    a {
+      margin-left: 7px;
+    }
+  }
+}
+
+.at-alert {
+  @extend .alert;
+  margin-top: 12px;
+  margin-bottom: 12px;
+
+  button {
+    @extend .close;
+  }
+
+  &.at-alert_success {
+    @extend .alert-success;
+  }
+
+  &.at-alert_danger {
+    @extend .alert-danger;
+  }
+}

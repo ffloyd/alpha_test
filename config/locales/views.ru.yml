@@ -1,6 +1,6 @@
 ru:
-  yes: Да
-  no: Нет
+  "yes": Да
+  "no": Нет
   actions:
     show: Просмотреть
     back: Назад

@@ -1,4 +1,4 @@
-dl.dl-horizontal
+dl.section__desclist
   dt #{ Loan.human_attribute_name(:paid) }:
   dd= @loan.paid? ? t('yes') : t('no')
   - %i(paid_debt paid_perc result_rate).each do |field|

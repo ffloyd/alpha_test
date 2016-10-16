@@ -1,18 +1,22 @@
-.table-responsive
-  table.table.table-striped.table-bordered.table-hover
+.section__table
+  table
     thead
       tr
-        th.fit= Payment.human_attribute_name(:month)
+        th.section__table__slim-column= Payment.human_attribute_name(:month)
         th= Payment.human_attribute_name(:amount)
-        th.fit= Payment.human_attribute_name(:deliquency)
-        th.fit= Payment.human_attribute_name(:pay_all)
+        th.section__table__slim-column= Payment.human_attribute_name(:deliquency)
+        th.section__table__slim-column= Payment.human_attribute_name(:pay_all)
     tbody
       - @loan.payments.each do |payment|
         tr
-          td.fit= payment.month
-          td= payment.amount_human
-          td.fit= payment.deliquency? ? t('yes') : t('no')
-          td.fit= payment.pay_all? ? t('yes') : t('no')
+          td.section__table__slim-column
+            = payment.month
+          td
+            = payment.amount_human
+          td.section__table__slim-column
+            = payment.deliquency? ? t('yes') : t('no')
+          td.section__table__slim-column
+            = payment.pay_all? ? t('yes') : t('no')
   - unless @loan.paid?
     .well.well-sm.clearfix
       = bootstrap_form_for Payment.new, url: add_next_payment_loan_path(@loan), layout: :inline, remote: true, method: :put do |f|
@@ -21,4 +25,4 @@
         .col-md-5
           = f.check_box :pay_all
         .col-md-4
-          = f.submit t('.add_payment')
+          = f.submit t('.add_payment'), class: 'at-submit-button'

@@ -1,5 +1,7 @@
 ru:
   activerecord:
+    models:
+      loan: Займ
     attributes:
       loan:
         legal_entity: Юридическое лицо
@@ -10,9 +12,9 @@ ru:
         deliquency_rate: Ставка при просрочке
         monthly_debt_payment: Платеж по долгу
         monthly_perc_payment: Платеж по процентам
-        monthly_deliquency_perc_payment: Платеж по процентам при просрочке
+        monthly_deliquency_perc_payment: Проценты при просрочке
         monthly_payment: Суммарный платеж
-        monthly_deliquency_payment: Суммарный платеж при просрочке
+        monthly_deliquency_payment: Платеж при просрочке
         paid: Оплачен
         paid_perc: Выплачено процентов
         paid_debt: Выплачено долга
