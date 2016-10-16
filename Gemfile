@@ -60,6 +60,7 @@ group :development do
   gem 'rubocop'
   # generators
   gem 'rails_layout'
+  gem 'bootstrap-generators'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

@@ -4,11 +4,18 @@ img {
   margin: 0 auto;
 }
 
+// visual fix
+input[type="radio"], input[type="checkbox"] {
+  width: initial;
+  height: initial;
+  margin-top: 7px;
+}
+
 // apply styles to HTML elements
 // to make views framework-neutral
 main {
   @extend .container;
-  margin-top: 51px; // accommodate the navbar
+  margin-top: $navbar-height + 10px; // accommodate the navbar
 }
 
 section {
