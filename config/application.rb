@@ -21,5 +21,14 @@ module Vagrant
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+
+    config.generators do |g|
+      g.helper false
+      g.stylesheets false
+      g.javascripts false
+      g.jbuilder false
+
+      g.view_specs false
+    end
   end
 end
