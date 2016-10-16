@@ -3,9 +3,6 @@
     = link_to loans_path, class: 'at-back-button' do 
       span
       =< t 'actions.back'
-    = link_to edit_loan_path(@loan), class: 'at-edit-button' do 
-      span
-      =< t 'actions.edit'
   h1= t('.title', legal_entity: @loan.legal_entity)
 
 .row

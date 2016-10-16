@@ -17,17 +17,9 @@ class LoansController < ApplicationController
     respond_with(@loan)
   end
 
-  def edit
-  end
-
   def create
     @loan = Loan.new(loan_params)
     @loan.save
-    respond_with(@loan)
-  end
-
-  def update
-    @loan.update(loan_params)
     respond_with(@loan)
   end
 

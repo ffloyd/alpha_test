@@ -13,3 +13,7 @@ ru:
       title: Займ для %{legal_entity}
       monthly_payment: Ежемесячный платеж
       main_info: Основная информация
+    new:
+      title: Создать займ
+    form:
+      submit: Создать займ

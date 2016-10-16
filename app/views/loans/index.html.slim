@@ -22,6 +22,4 @@
           td.fit
             = link_to t('actions.show'), loan, class: 'at-action-button'
             | &nbsp;
-            = link_to t('actions.edit'), edit_loan_path(loan), class: 'at-action-button'
-            | &nbsp;
             = link_to t('actions.delete'), loan, method: :delete, data: { confirm: t('actions.confirmation') }, class: 'at-action-button'
