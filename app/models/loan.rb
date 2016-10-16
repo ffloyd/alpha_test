@@ -6,7 +6,7 @@ class Loan < ApplicationRecord
   BASE_ANNUAL_RATE    = 0.3
   BASE_DELIQENCY_RATE = 0.5
 
-  has_many :payments
+  has_many :payments, dependent: :destroy
 
   validates :legal_entity,
             :amount,

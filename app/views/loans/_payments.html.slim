@@ -15,7 +15,7 @@
           td.fit= payment.pay_all? ? t('yes') : t('no')
   - unless @loan.paid?
     .well.well-sm.clearfix
-      = bootstrap_form_for Payment.new, url: '/', layout: :inline do |f|
+      = bootstrap_form_for Payment.new, url: add_next_payment_loan_path(@loan), layout: :inline, remote: true, method: :put do |f|
         .col-md-3
           = f.check_box :deliquency
         .col-md-5

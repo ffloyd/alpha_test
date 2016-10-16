@@ -1,0 +1,6 @@
+dl.dl-horizontal
+  dt #{ Loan.human_attribute_name(:paid) }:
+  dd= @loan.paid? ? t('yes') : t('no')
+  - %i(paid_debt paid_perc result_rate).each do |field|
+    dt #{ Loan.human_attribute_name(field) }:
+    dd= @loan.try("#{field}_human") || @loan.public_send(field)
